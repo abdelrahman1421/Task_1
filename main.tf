@@ -15,3 +15,15 @@ module "network" {
   firewall_allow_ports              = var.firewall_allow_ports
 
 }
+
+module "vm" {
+  source                    = "./modules/Compute_Instance"
+  vm_name                   = var.vm_name
+  vm_machine_type           = var.vm_machine_type
+  vm_machine_image          = var.vm_machine_image
+  vm_zone                   = var.vm_zone
+  network                   = module.network.vpc_id
+  subnetwork                = module.network.subnetwork_id
+  allow_stopping_for_update = var.allow_stopping_for_update
+
+}

@@ -23,3 +23,13 @@ firewall_direction      = "INGRESS"
 firewall_source_ranges  = ["35.235.240.0/20"]
 firewall_allow_protocol = "tcp"
 firewall_allow_ports    = ["22"]
+
+#######################################################
+
+# VM
+
+vm_name                   = "private-vm"
+vm_machine_type           = "e2-medium"
+vm_zone                   = "us-central1-a"
+vm_machine_image          = "debian-cloud/debian-11"
+allow_stopping_for_update = true
