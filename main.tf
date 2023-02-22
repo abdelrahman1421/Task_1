@@ -27,3 +27,35 @@ module "vm" {
   allow_stopping_for_update = var.allow_stopping_for_update
 
 }
+
+##################################
+
+# 
+
+module "gke" {
+  source         = "./modules/GKE"
+  vpc_network    = module.network.vpc_id
+  vpc_subnetwork = module.network.subnetwork_id
+  cluster_name                                        = var.cluster_name
+  location                                            = var.location
+  remove_default_node_pool                            = var.remove_default_node_pool
+  initial_node_count                                  = var.initial_node_count
+  master_authorized_networks_cidr_blocks              = var.master_authorized_networks_cidr_blocks
+  master_authorized_networks_cidr_blocks_display_name = var.master_authorized_networks_cidr_blocks_display_name
+  cluster_autoscaling                                 = var.cluster_autoscaling
+  cluster_ipv4_cidr_block                             = var.cluster_ipv4_cidr_block
+  services_ipv4_cidr_block                            = var.services_ipv4_cidr_block
+  enable_private_nodes                                = var.enable_private_nodes
+  enable_private_endpoint                             = var.enable_private_endpoint
+  master_ipv4_cidr_block                              = var.master_ipv4_cidr_block
+  node_pool_name                                      = var.node_pool_name
+  node_pool_location                                  = var.node_pool_location
+  node_count                                          = var.node_count
+  node_config_preemptible                             = var.node_config_preemptible
+  node_config_machine_type                            = var.node_config_machine_type
+  node_config_disk_size_gb                            = var.node_config_disk_size_gb
+  node_config_disk_type                               = var.node_config_disk_type
+  node_config_image_type                              = var.node_config_image_type
+  node_config_oauth_scopes                            = var.node_config_oauth_scopes
+}
+

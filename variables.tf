@@ -86,5 +86,96 @@ variable "vm_zone" {
 variable "allow_stopping_for_update" {
   type = bool
 }
+# <<GKE>>
 
-# <>
+variable "cluster_name" {
+  type = string
+}
+
+variable "location" {
+  type = string
+}
+
+variable "remove_default_node_pool" {
+  type = bool
+}
+
+variable "initial_node_count" {
+  type = number
+}
+
+
+variable "master_authorized_networks_cidr_blocks" {
+  type = string
+}
+
+variable "master_authorized_networks_cidr_blocks_display_name" {
+  type = string
+}
+
+variable "cluster_autoscaling" {
+  type = bool
+}
+
+variable "cluster_ipv4_cidr_block" {
+  type = string
+}
+
+variable "services_ipv4_cidr_block" {
+  type = string
+}
+
+variable "enable_private_nodes" {
+  type = bool
+}
+
+variable "enable_private_endpoint" {
+  type = bool
+}
+
+variable "master_ipv4_cidr_block" {
+  type = string
+}
+
+variable "node_pool_name" {
+  type = string
+}
+
+variable "node_pool_location" {
+  type = string
+}
+
+variable "node_count" {
+  type = number
+}
+
+variable "node_locations " {
+  type = list(string)
+
+}
+
+variable "node_config_preemptible" {
+  type = bool
+}
+
+variable "node_config_machine_type" {
+  type = string
+}
+
+
+variable "node_config_disk_size_gb" {
+  type = number
+}
+
+variable "node_config_disk_type" {
+  type = string
+}
+
+variable "node_config_image_type" {
+  type = string
+}
+
+variable "node_config_oauth_scopes" {
+  type = list(string)
+}
+
