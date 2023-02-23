@@ -81,3 +81,8 @@ module "buckets" {
   buckets = var.buckets
   
 }
+
+module "bigquery" {
+  source = "./modules/BigQuery"
+  datasets = var.datasets
+}

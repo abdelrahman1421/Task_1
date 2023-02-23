@@ -79,18 +79,41 @@ gcr-iam-role-permissions       = "roles/storage.objectViewer"
 
 buckets = {
     bucket1 = {
-      name          = "abdelrahman-377520my-bucket-1"
+      name          = "abdelrahman-377520-my-bucket-1"
       storage_class = "STANDARD"
       location      = "US"
     }
     bucket2 = {
-      name          = "abdelrahman-377520my-bucket-2"
+      name          = "abdelrahman-377520-my-bucket-2"
       storage_class = "STANDARD"
       location      = "US"
     }
     bucket3 = {
-      name          = "abdelrahman-377520my-bucket-3"
+      name          = "abdelrahman-377520-my-bucket-3"
       storage_class = "STANDARD"
       location      = "US"
+    }
+  }
+##########
+  datasets = {
+    "dataset1" = {
+      friendly_name = "abdelrahman-377520-dataset1"
+      delete_contents_on_destroy = true
+      location = "US"
+      description = "First DataSet"
+    },
+
+    "dataset2" = {      
+      friendly_name = "abdelrahman-377520-dataset2"
+      delete_contents_on_destroy = true
+      location = "EU"
+      description = "Second DataSet"
+    },
+
+    "dataset3" = {      
+      friendly_name = "abdelrahman-377520-dataset2"
+      delete_contents_on_destroy = true
+      location = "EU"
+      description = "Third DataSet"
     }
   }
