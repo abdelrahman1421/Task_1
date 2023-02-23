@@ -66,9 +66,8 @@ variable "node_count" {
     type = number
 }
 
-variable "node_locations " {
+variable "node_locations" {
   type = list(string)
-
 }
 
 variable "node_config_preemptible" {

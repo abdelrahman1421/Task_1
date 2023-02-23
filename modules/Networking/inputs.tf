@@ -10,6 +10,7 @@ variable "vpc_mtu" {
   type= number
 }
 
+
 #################################
 
 variable "subnet_a_name" {
@@ -52,4 +53,31 @@ variable "firewall_allow_protocol" {
 
 variable "firewall_allow_ports" {
   type = list(any)
+}
+
+
+####################
+
+variable "firewall_rules" {
+  type = map(object({
+    description = string
+    direction   = string
+    action      = string
+    protocol   = string
+    ports = list(string)
+    source_ranges  = list(string)
+  }))
+  description = "Map of firewall rules to create"
+
+  default = {
+    allow-ssh-through-iap = {
+      description = "allow-ssh-through-iap"
+      direction   = "INGRESS"
+      action      = "allow"
+      protocol   = "tcp"
+      ports = ["22"]
+      source_ranges  = ["35.235.240.0/20"]
+
+    }
+}
 }

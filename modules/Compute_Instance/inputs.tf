@@ -2,6 +2,10 @@ variable "vm_name" {
     type = string
 }
 
+# variable "vm_tag" {
+#   type = list(string)
+# }
+
 variable "vm_machine_type" {
     type = string
 }

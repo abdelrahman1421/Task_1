@@ -38,9 +38,7 @@ resource "google_container_node_pool" "nodepool" {
   location   = var.node_pool_location
   cluster    = google_container_cluster.private-cluster.id
   node_count = var.node_count
-
-  node_locations = var.node_locations
-  
+  node_locations = var.node_locations   
   node_config {
     preemptible = var.node_config_preemptible
     machine_type = var.node_config_machine_type

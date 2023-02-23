@@ -12,16 +12,20 @@ resource "google_compute_subnetwork" "subnet_a" {
   private_ip_google_access = var.subnet_a_private_ip_google_access
 }
 
-resource "google_compute_firewall" "rules" {
-  name        = var.firewall_name
+
+resource "google_compute_firewall" "firewall_rules" {
+  for_each = var.firewall_rules
+  name        = each.key
+  description = each.value.description
+  direction   = each.value.direction
   network     = google_compute_network.vpc_network.id
-  description = var.firewall_description
-  direction     = var.firewall_direction
-  source_ranges = var.firewall_source_ranges
 
   allow {
-    protocol  = var.firewall_allow_protocol
-    ports     = var.firewall_allow_ports
+        ports = each.value.ports
+        protocol  = each.value.protocol
   }
 
+  source_ranges = each.value.source_ranges
 }
+
+

@@ -33,9 +33,9 @@ module "vm" {
 # 
 
 module "gke" {
-  source         = "./modules/GKE"
-  vpc_network    = module.network.vpc_id
-  vpc_subnetwork = module.network.subnetwork_id
+  source                                              = "./modules/GKE"
+  vpc_network                                         = module.network.vpc_id
+  vpc_subnetwork                                      = module.network.subnetwork_id
   cluster_name                                        = var.cluster_name
   location                                            = var.location
   remove_default_node_pool                            = var.remove_default_node_pool
@@ -50,6 +50,7 @@ module "gke" {
   master_ipv4_cidr_block                              = var.master_ipv4_cidr_block
   node_pool_name                                      = var.node_pool_name
   node_pool_location                                  = var.node_pool_location
+  node_locations                                      = var.node_locations
   node_count                                          = var.node_count
   node_config_preemptible                             = var.node_config_preemptible
   node_config_machine_type                            = var.node_config_machine_type
@@ -59,3 +60,18 @@ module "gke" {
   node_config_oauth_scopes                            = var.node_config_oauth_scopes
 }
 
+module "serviceAccount" {
+  source                         = "./modules/Service_Account"
+  bigquery-account-id            = var.bigquery-account-id
+  bigquery-display-name          = var.bigquery-display-name
+  bigquery-iam-role-id           = var.bigquery-iam-role-id
+  bigquery-iam-role-permissions  = var.bigquery-iam-role-permissions
+  gs-bucket-account-id           = var.gs-bucket-account-id
+  gs-bucket-display-name         = var.gs-bucket-display-name
+  gs-bucket-iam-role-id          = var.gs-bucket-iam-role-id
+  gs-bucket-iam-role-permissions = var.gs-bucket-iam-role-permissions
+  gcr-account-id                 = var.gcr-account-id
+  gcr-display-name               = var.gcr-display-name
+  gcr-iam-role-permissions       = var.gcr-iam-role-permissions
+  project                        = var.project
+}

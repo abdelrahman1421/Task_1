@@ -20,6 +20,8 @@ variable "vpc_mtu" {
   type = number
 }
 
+
+
 # <Subnet>
 
 variable "subnet_a_name" {
@@ -70,6 +72,10 @@ variable "firewall_allow_ports" {
 variable "vm_name" {
   type = string
 }
+
+# variable "vm_tag" {
+#   type = list(string)
+# }
 
 variable "vm_machine_type" {
   type = string
@@ -149,7 +155,7 @@ variable "node_count" {
   type = number
 }
 
-variable "node_locations " {
+variable "node_locations" {
   type = list(string)
 
 }
@@ -179,3 +185,57 @@ variable "node_config_oauth_scopes" {
   type = list(string)
 }
 
+# <<SA>>
+
+variable "bigquery-account-id" {
+  type = string
+}
+
+variable "bigquery-display-name" {
+  type = string
+}
+
+variable "bigquery-iam-role-id" {
+  type = string
+}
+
+
+variable "bigquery-iam-role-permissions" {
+  type = list(any)
+}
+
+variable "project" {
+  type = string
+
+}
+
+#
+variable "gs-bucket-account-id" {
+  type = string
+}
+
+variable "gs-bucket-display-name" {
+  type = string
+}
+
+variable "gs-bucket-iam-role-id" {
+  type = string
+}
+
+variable "gs-bucket-iam-role-permissions" {
+  type = list(any)
+}
+
+#
+variable "gcr-account-id" {
+  type = string
+}
+
+variable "gcr-display-name" {
+  type = string
+}
+
+
+variable "gcr-iam-role-permissions" {
+  type = string
+}

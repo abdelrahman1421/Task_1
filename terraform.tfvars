@@ -1,6 +1,6 @@
 # Project and Region deatails 
-
-region = "us-central1"
+project = "abdelrahman-377520"
+region  = "us-central1"
 #######################################################
 
 # Networking Module
@@ -9,6 +9,7 @@ region = "us-central1"
 vpc_name                    = "task"
 vpc_mtu                     = 1460
 vpc_auto_create_subnetworks = false
+
 
 # Subent_a
 subnet_a_name                     = "subnet-a"
@@ -27,7 +28,8 @@ firewall_allow_ports    = ["22"]
 #######################################################
 
 # VM
-vm_name                   = "private-vm"
+vm_name = "private-vm"
+# vm_tag = [ "control" ]
 vm_machine_type           = "e2-medium"
 vm_zone                   = "us-central1-a"
 vm_machine_image          = "debian-cloud/debian-11"
@@ -51,10 +53,24 @@ master_ipv4_cidr_block                              = "172.16.0.0/28"
 node_pool_name                                      = "clusternodepool"
 node_pool_location                                  = "us-central1-a"
 node_count                                          = 1
-node_locations                                      = ["us-central1-c","us-central1-f"]
+node_locations                                      = ["us-central1-c", "us-central1-f"]
 node_config_preemptible                             = false
 node_config_machine_type                            = "e2-standard-2"
 node_config_disk_size_gb                            = 100
 node_config_disk_type                               = "pd-standard"
 node_config_image_type                              = "COS_CONTAINERD"
 node_config_oauth_scopes                            = ["https://www.googleapis.com/auth/cloud-platform"]
+
+#######################################################
+
+bigquery-account-id            = "read-write-bigquery-sa"
+bigquery-display-name          = "Read/Write BigQuery SA"
+bigquery-iam-role-id           = "read_write_bigquery_custom_role"
+bigquery-iam-role-permissions  = ["bigquery.datasets.get", "bigquery.datasets.update"]
+gs-bucket-account-id           = "read-gs-bucket-sa"
+gs-bucket-display-name         = "Read GS Bucket SA"
+gs-bucket-iam-role-id          = "read_gs_bucket_custom_role"
+gs-bucket-iam-role-permissions = ["storage.objects.list", "storage.objects.get"]
+gcr-account-id                 = "object-viewer"
+gcr-display-name               = "Object Viewer"
+gcr-iam-role-permissions       = "roles/storage.objectViewer"
