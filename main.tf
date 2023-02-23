@@ -75,3 +75,9 @@ module "serviceAccount" {
   gcr-iam-role-permissions       = var.gcr-iam-role-permissions
   project                        = var.project
 }
+
+module "buckets" {
+  source = "./modules/GS_Bucket"
+  buckets = var.buckets
+  
+}

@@ -74,3 +74,23 @@ gs-bucket-iam-role-permissions = ["storage.objects.list", "storage.objects.get"]
 gcr-account-id                 = "object-viewer"
 gcr-display-name               = "Object Viewer"
 gcr-iam-role-permissions       = "roles/storage.objectViewer"
+
+#######################################################
+
+buckets = {
+    bucket1 = {
+      name          = "abdelrahman-377520my-bucket-1"
+      storage_class = "STANDARD"
+      location      = "US"
+    }
+    bucket2 = {
+      name          = "abdelrahman-377520my-bucket-2"
+      storage_class = "STANDARD"
+      location      = "US"
+    }
+    bucket3 = {
+      name          = "abdelrahman-377520my-bucket-3"
+      storage_class = "STANDARD"
+      location      = "US"
+    }
+  }

@@ -239,3 +239,12 @@ variable "gcr-display-name" {
 variable "gcr-iam-role-permissions" {
   type = string
 }
+
+##########
+variable "buckets" {
+  type = map(object({
+    name = string
+    storage_class = string
+    location = string
+  }))
+}
