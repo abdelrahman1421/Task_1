@@ -29,4 +29,10 @@ variable "subnetwork" {
 variable "allow_stopping_for_update" {
   type = bool
 }
+variable "vm_service_account" {
+  type = string
+}
 
+variable "scopes" {
+  type = list
+}

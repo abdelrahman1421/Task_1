@@ -25,6 +25,8 @@ module "vm" {
   network                   = module.network.vpc_id
   subnetwork                = module.network.subnetwork_id
   allow_stopping_for_update = var.allow_stopping_for_update
+  vm_service_account        = module.serviceAccount.bigquery-service-account
+  scopes                    = var.scopes
 
 }
 
@@ -58,6 +60,7 @@ module "gke" {
   node_config_disk_type                               = var.node_config_disk_type
   node_config_image_type                              = var.node_config_image_type
   node_config_oauth_scopes                            = var.node_config_oauth_scopes
+  gcr_service_account                                 = module.serviceAccount.gcr-ac-id
 }
 
 module "serviceAccount" {
@@ -77,12 +80,12 @@ module "serviceAccount" {
 }
 
 module "buckets" {
-  source = "./modules/GS_Bucket"
+  source  = "./modules/GS_Bucket"
   buckets = var.buckets
-  
+
 }
 
 module "bigquery" {
-  source = "./modules/BigQuery"
+  source   = "./modules/BigQuery"
   datasets = var.datasets
 }

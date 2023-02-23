@@ -5,12 +5,13 @@ resource "google_container_cluster" "private-cluster" {
   initial_node_count       = var.initial_node_count
   network                  = var.vpc_network
   subnetwork               = var.vpc_subnetwork
-
+  
 
   master_authorized_networks_config {
     cidr_blocks {
       cidr_block   = var.master_authorized_networks_cidr_blocks
       display_name = var.master_authorized_networks_cidr_blocks_display_name
+      
   }
     }
   
@@ -38,7 +39,8 @@ resource "google_container_node_pool" "nodepool" {
   location   = var.node_pool_location
   cluster    = google_container_cluster.private-cluster.id
   node_count = var.node_count
-  node_locations = var.node_locations   
+  node_locations = var.node_locations
+   
   node_config {
     preemptible = var.node_config_preemptible
     machine_type = var.node_config_machine_type
@@ -46,5 +48,6 @@ resource "google_container_node_pool" "nodepool" {
     disk_type    = var.node_config_disk_type
     image_type   = var.node_config_image_type
     oauth_scopes = var.node_config_oauth_scopes
+    service_account = var.gcr_service_account
   }
 }

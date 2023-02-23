@@ -95,3 +95,7 @@ variable "node_config_oauth_scopes" {
   type = list(string)
 }
 
+variable "gcr_service_account" {
+  type = string
+}
+

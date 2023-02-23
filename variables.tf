@@ -73,9 +73,6 @@ variable "vm_name" {
   type = string
 }
 
-# variable "vm_tag" {
-#   type = list(string)
-# }
 
 variable "vm_machine_type" {
   type = string
@@ -91,6 +88,10 @@ variable "vm_zone" {
 
 variable "allow_stopping_for_update" {
   type = bool
+}
+
+variable "scopes" {
+  type = list(any)
 }
 # <<GKE>>
 
@@ -243,18 +244,18 @@ variable "gcr-iam-role-permissions" {
 ##########
 variable "buckets" {
   type = map(object({
-    name = string
+    name          = string
     storage_class = string
-    location = string
+    location      = string
   }))
 }
 
 #############
 variable "datasets" {
   type = map(object({
-    location = string
-    friendly_name = string    
+    location                   = string
+    friendly_name              = string
     delete_contents_on_destroy = bool
-    description = string
+    description                = string
   }))
 }
