@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app
+data:
+  ENVIRONMENT: PROD
+  HOST: localhost
+  PORT: "8080"
+  REDIS_HOST: redis-service
+  REDIS_PORT: "6379"
+  REDIS_DB: "0"
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-frontend      
+  template:
+    metadata:
+      labels:
+        app: app-frontend
+    spec:
+      containers:
+        - name: python-app
+          image: gcr.io/abdelrahman-377520/app:v2
+          ports:
+            - containerPort: 8080
+          env:
+          - name: ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: app
+                key: ENVIRONMENT
+                
+          - name: HOST
+            valueFrom:
+              configMapKeyRef:
+                name: app
+                key: HOST
+                
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: app
+                key: PORT
+                
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: app
+                key: REDIS_HOST
+              
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: app
+                key: REDIS_PORT
+                
+          - name: REDIS_DB
+            valueFrom:
+             configMapKeyRef:
+              name: app
+              key: REDIS_DB
+                
+          
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-balancer  
+spec:
+  type: LoadBalancer
+  selector:
+    app: app-frontend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
