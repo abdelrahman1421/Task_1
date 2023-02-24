@@ -1,0 +1,49 @@
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: nexus
+# provisioner: kubernetes.io/gce-pd
+# parameters:
+#   type: pd-standard
+
+# ---
+
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: nexus-pvc
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 10Gi
+#   storageClassName: nexus
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-service-account
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pvc-admin-role
+rules:
+- apiGroups: [""]
+  resources: ["persistentvolumeclaims"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pvc-admin-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: my-service-account
+roleRef:
+  kind: Role
+  name: pvc-admin-role
+  apiGroup: rbac.authorization.k8s.io

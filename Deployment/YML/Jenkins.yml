@@ -1,15 +1,14 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: jenkins-pv-claim
+  name: jenkins
+  namespace: shared-services
 spec:
-  storageClassName: jenkins-storage
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
-
+      storage: 20Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,14 +28,16 @@ spec:
       - name: jenkins
         image: gcr.io/abdelrahman-377520/jenkins:v1
         ports:
-        - containerPort: 8080
+         - containerPort: 8080
         volumeMounts:
-            - mountPath: "/var/jenkins_home/"
-              name: jenkins-pv
+            - name: jenkins-pv
+              mountPath: "/var/"
+              subPath: jenkins_home
       volumes:
         - name: jenkins-pv
           persistentVolumeClaim:
-            claimName: jenkins-pv-claim  
+            claimName: jenkins
+            readOnly: false
 ---
 apiVersion: v1
 kind: Service

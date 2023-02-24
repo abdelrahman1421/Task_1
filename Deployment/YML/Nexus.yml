@@ -1,19 +1,21 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: nexus-pv-claim
+  name: nexus
+  namespace: shared-services
 spec:
-  storageClassName: nexus-storage
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
+  storageClassName: standard-rwo
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nexus-deployment
+  namespace: shared-services
 spec:
   selector:
     matchLabels:
@@ -31,19 +33,30 @@ spec:
             - containerPort: 8081
           volumeMounts:
             - name: nexus-pv
-              mountPath: "/nexus-data"
+              mountPath: /sonatype-work
+          resources:
+                limits:
+                  memory: "2Gi"
+                  cpu: "1000m"
+                requests:
+                  memory: "1Gi"
+                  cpu: "250m"
       volumes:
         - name: nexus-pv
           persistentVolumeClaim:
-            claimName: nexus-pv-claim 
+            claimName: nexus
+            readOnly: false 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: nexus-service
   namespace: shared-services
+
 spec:
   type: LoadBalancer
+  selector:
+    app: nexus
   ports:
     - port: 8081
       targetPort: 8081
