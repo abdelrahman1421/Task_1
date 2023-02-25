@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app
+  namespace: dev  
 data:
   ENVIRONMENT: PROD
   HOST: localhost
@@ -17,6 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: python-app
+  namespace: dev  
 spec:
   replicas: 2
   selector:
@@ -77,7 +79,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: load-balancer  
+  name: load-balancer
+  namespace: dev   
 spec:
   type: LoadBalancer
   selector:

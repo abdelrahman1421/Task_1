@@ -9,7 +9,6 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: standard-rwo
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,9 +49,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nexus-service
+  name: nexus
   namespace: shared-services
-
 spec:
   type: LoadBalancer
   selector:
