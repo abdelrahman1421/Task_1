@@ -39,7 +39,7 @@ scopes                    = ["cloud-platform"]
 #######################################################
 
 # GKE
-cluster_name                                        = "task-cluster"
+cluster_name                                        = "private-gke-cluster"
 location                                            = "us-central1-a"
 remove_default_node_pool                            = true
 initial_node_count                                  = 1
@@ -64,6 +64,7 @@ node_config_oauth_scopes                            = ["https://www.googleapis.c
 
 #######################################################
 
+# BigQuery
 bigquery-account-id            = "read-write-bigquery-sa"
 bigquery-display-name          = "Read/Write BigQuery SA"
 bigquery-iam-role-id           = "read_write_bigquery_custom_role"
@@ -96,6 +97,8 @@ buckets = {
   }
 }
 ##########
+
+# DataSets
 datasets = {
   "dataset1" = {
     friendly_name              = "abdelrahman-377520-dataset1"
